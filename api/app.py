@@ -51,9 +51,15 @@ def search_upc():
     daily_calorie_limit = float(request.query.get('daily_cal', '2000'))
 
     label = get_food_label(upc)
-    nutrients = calculate_nutrient_percents(label['productsArray'][0]['nutrients'], daily_calorie_limit)
+    product = label['productsArray'][0]
+    nutrients = calculate_nutrient_percents(product['nutrients'], daily_calorie_limit)
     
-    data = {'nutrients': nutrients}
+    data = {'item': product['product_name'],
+            'serving_size': product['serving_size'],
+            'serving_size_uom': product['serving_size_uom'],
+            'servings_per_container': product['servings_per_container'],
+            'nutrients': nutrients, 
+            'ingredients': product['ingredients']}
 
     return data
 

@@ -29,6 +29,7 @@ R.View = R.View || {};
       var formData = $(this.FROM).serializeArray();
       formData['access_token'] = $.totalStorage('auth_token');
       formData['user_id'] = $.totalStorage('user_id');
+      formData['daily_cal'] = $.totalStorage('limit');
       $.ajax({
         url: 'http://pacific-eyrie-4115.herokuapp.com/search',
         data: formData,
@@ -36,6 +37,9 @@ R.View = R.View || {};
         success: function(data) {
           self.model.set(data);
           R.main.navigate('product-page');
+        },
+        error: function() {
+          window.alert('Product not found');
         }
       });
     }

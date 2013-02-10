@@ -7,16 +7,10 @@ R.Router = R.Router || {};
   R.Router.Main = Backbone.Router.extend({
 
     routes: {
-      "login": "login",
-      "start": "start",
+      "*actions": 'login',
       'person-input': 'personInput',
       "product-search": "productSearch",
       "product-page": "productPage"
-    },
-
-    initialize: function() {
-      Backbone.history.start();
-      this.navigate('login');
     },
 
     login: function() {
@@ -28,12 +22,6 @@ R.Router = R.Router || {};
       $(R.Const.MAIN).append($loginButton);
     },
 
-    start: function() {
-      // set api auth cookie
-      // move to the input weight page
-      this.navigate('person-input');
-    },
-
     personInput: function() {
       $(R.Const.MAIN).addClass('personInput');
       var template = _.template(R.Template.Person.Start);
@@ -43,4 +31,6 @@ R.Router = R.Router || {};
   });
 
   var main = new R.Router.Main();
+  Backbone.history.start()
+
 })(R, _, $, Backbone);

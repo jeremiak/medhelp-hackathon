@@ -55,6 +55,9 @@ R.Template.Product = {
     <div class="right"> \
       <input type="text" name="upc" /><span></span> \
     </div> \
+    <div class="centered"> \
+      <a href="#" class="button submitForm">start</a> \
+    </div> \
   </form> \
   '
 };

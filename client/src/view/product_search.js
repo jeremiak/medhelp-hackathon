@@ -24,7 +24,7 @@ R.View = R.View || {};
       return this;
     },
 
-    submitForm: function() {
+    submit: function() {
       var self = this;
       var formData = $(this.FROM).serializeArray();
       formData['access_token'] = $.totalStorage('auth_token');

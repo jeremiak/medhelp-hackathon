@@ -16,7 +16,7 @@ R.Router = R.Router || {};
     },
 
     initialize: function() {
-      this.productModel = new new R.Model.Product();
+      this.productModel = new R.Model.Product();
     },
 
     start: function() {

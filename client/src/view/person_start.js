@@ -36,7 +36,7 @@ R.View = R.View || {};
       $.ajax({
         url: 'http://pacific-eyrie-4115.herokuapp.com/daily_limit',
         data: formData,
-        type: 'POST',
+        type: 'GET',
         success: function(data) {
           var dailyLimit = data['limit'];
           $.totalStorage( 'limit', dailyLimit);

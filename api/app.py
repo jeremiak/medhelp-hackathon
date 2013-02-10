@@ -1,7 +1,8 @@
 from os import environ
 
-from bottle import get, request, response, run
+from bottle import get, redirect, request, response, run
 import requests
+import simplejson as json
 
 def get_food_label(upc):
     url = 'http://api.foodessentials.com/labelarray?u=%s&sid=ec005ec5-eda3-4bdc-8ebd-479d7920f264&n=1&s=0&f=json&api_key=v2ub5nu4ka8w74uyqtwdw92u' % upc
@@ -34,9 +35,7 @@ def calculate_nutrient_percents(nutrients, daily_cal):
                 value = '0.0'
 
             uom = nutrient['nutrient_uom']
-            
             percentage = float(value)/daily_allowance[name] * 100
-
             data[name] = {'Value': value,
                     'uom': uom,
                     'Percent': '%.2f' % percentage}
@@ -93,15 +92,29 @@ def calculate_daily_intake():
     
     limit = bmr_and_activity - ((pounds_per_week * 3500) / 7)
 
-    print age
-    print height
-    print current_weight
-    print goal_weight
-    print gender
-    print activity_level
-    print limit
-
     return {'limit': '%.2f' % limit}
+
+@get('/callback')
+def handle_oauth_callback():
+    code = request.query.get('code', None)
+    url = 'https://hapi.medhelp.ws/oauth/token?client_id=e7fc52ddd676d34660c05022e1c26fe822c4b2fe4f7555d52500007ecad5063f'
+
+    data = {}
+    data['authorize'] = 'Yes'
+    data['grant_type'] = 'authorization-code'
+    data['response_type'] = 'code'
+    data['redirect_uri'] = 'http://0.0.0.0:5000/callback'
+    data['client_id'] = 'e7fc52ddd676d34660c05022e1c26fe822c4b2fe4f7555d52500007ecad5063f'
+    data['client_secret'] = 'd7daa38353fe6e9a904630ab4e57cf56809449010b7ea0636699e60b7e84b6e7'
+    data['code'] = code
+
+    r = requests.post(url, data=data)
+
+    j = r.json()
+    token = j['access_token']
+    user_id = j['user_id']
+    url = 'http://jeremiak.github.com/medhelp-hackathon/client/index.html?access_token=%s&user_id=%s' % (token, user_id)
+    redirect(url)
 
 @get('/status')
 def return_status():

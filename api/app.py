@@ -47,6 +47,9 @@ def calculate_nutrient_percents(nutrients, daily_cal):
 def search_upc():
     response.headers['Access-Control-Allow-Origin'] = '*'
 
+    for param in request.query.keys():
+        print "%s: %s" % (param, request.query.get(param))
+
     upc = request.query.get('upc', '016000264601')
     daily_calorie_limit = float(request.query.get('daily_cal', '2000'))
 
@@ -61,11 +64,14 @@ def search_upc():
 def calculate_daily_intake():
     response.headers['Access-Control-Allow-Origin'] = '*'
     
+    for param in request.query.keys():
+        print "%s: %s" % (param, request.query.get(param))
+
     age = int(request.query.get('age', '25'))
     height = int(request.query.get('height', '70'))
-    current_weight = int(request.query.get('current_weight', '150'))
-    goal_weight = int(request.query.get('goal_weight', '100'))
-    weeks_to_goal = int(request.query.get('weeks_to_goal', '4'))
+    current_weight = int(request.query.get('current_weight', '250'))
+    goal_weight = int(request.query.get('goal_weight', '180'))
+    weeks_to_goal = int(request.query.get('weeks_to_goal', '10'))
     gender = request.query.get('gender', 'male').lower()
     activity_level = request.query.get('activity_level', 'moderately active').lower()
 
@@ -100,6 +106,9 @@ def calculate_daily_intake():
 @get('/status')
 def return_status():
     response.headers['Access-Control-Allow-Origin'] = '*'
+    
+    for param in request.query.keys():
+        print "%s: %s" % (param, request.query.get(param))
 
     return "Up and working"
 

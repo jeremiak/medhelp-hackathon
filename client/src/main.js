@@ -76,7 +76,7 @@ R.Router = R.Router || {};
     productPage: function() {
       console.log('on product  page');
       $(R.Const.MAIN).empty();
-      var productView = new R.View.ProductView({model: this.productModel});
+      var productView = new R.View.Product({model: this.productModel});
       $(R.Const.MAIN).append(productView.render().el);
     }
   });

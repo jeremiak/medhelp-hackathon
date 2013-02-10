@@ -24,10 +24,11 @@ R.View = R.View || {};
       return this;
     },
 
-    submit: function() {
+    submit: function(ev) {
       ev.preventDefault();
       var self = this;
-      var formData = $(this.FROM).serializeArray();
+      var formData = {};
+      formData['upc'] = $(this.FROM).find('input[name="upc"]').val();
       formData['access_token'] = $.totalStorage('auth_token');
       formData['user_id'] = $.totalStorage('user_id');
       formData['daily_cal'] = $.totalStorage('limit');

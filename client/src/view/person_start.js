@@ -35,7 +35,7 @@ R.View = R.View || {};
         success: function(data) {
           var dailyLimit = data['limit'];
           $.totalStorage( 'limit', dailyLimit);
-          self.navigate('product-search');
+          R.main.navigate('product-search');
         }
       });
     }

@@ -132,6 +132,8 @@ def handle_oauth_callback():
     r = requests.post(url, data=data)
 
     j = r.json()
+    print j
+    
     token = j['access_token']
     user_id = j['user_id']
     url = 'http://jeremiak.github.com/medhelp-hackathon/client/index.html?access_token=%s&user_id=%s' % (token, user_id)

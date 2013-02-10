@@ -24,16 +24,22 @@ R.View = R.View || {};
       return this;
     },
 
-    submitForm: function() {
-      var formData = $(this.FROM).serialize();
-      var authToken = $.localStorage('auth_token').data;
-      var userId = $.localStorage('user_id').data;
+    submit: function() {
+      var self = this;
+      var formData = $(this.FROM).serializeArray();
+      formData['access_token'] = $.totalStorage('auth_token');
+      formData['user_id'] = $.totalStorage('user_id');
+      formData['daily_cal'] = $.totalStorage('limit');
       $.ajax({
         url: 'http://pacific-eyrie-4115.herokuapp.com/search',
         data: formData,
         type: 'GET',
-        success: function() {
-          // what do now? we have to go to a new page, but need GET params
+        success: function(data) {
+          self.model.set(data);
+          R.main.navigate('product-page');
+        },
+        error: function() {
+          window.alert('Product not found');
         }
       });
     }

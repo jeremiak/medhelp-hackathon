@@ -120,3 +120,83 @@ body {
 .loginButton {
   margin: 30px auto;
 }
+
+/*
+ * for the nutrition facts label view
+ */
+.clear-fix {
+    clear:both;
+    display:block;
+}
+.right-align {
+    text-align: right;
+}
+.nutrition-label, .ingredients {
+    font-family: Helvetica;
+    padding:2px;
+}
+.nutrition-label {
+    border: 1px solid black;
+    display:block;
+}
+.nutrition-label .filled-in {
+    background-color: black;
+    width:100%;
+    height:10px;
+}
+.nutrition-label h1, .nutrition-label h2, .nutrition-label h3, .nutrition-label h4 {
+    margin:0;
+}
+.nutrition-label h1 {
+    font-weight:900;
+    line-height:1em;
+}
+.nutrition-label h2 {
+    font-size:1.1em;
+    line-height:1.1em;
+}
+.nutrition-label h2:last-child {
+    margin-bottom:1px;
+}
+.nutrition-label h4 {
+    border-top:1px solid black;
+    font-weight:400;
+    font-size:.5em;
+}
+.small-label {
+    font-weight:900;
+    font-size:.7em;
+}
+.nutrition-fact {
+    border:1px solid black;
+    width:100%;
+}
+.nutrition-fact div {
+    margin-top:1px;
+    float:left;
+}
+.nutrient {
+    font-weight:900;
+}
+.nutrient-amount {
+    margin-left:5px;
+}
+.nutrition-fact div.percentage {
+    position:relative;
+    float: right;
+    padding-right:2px;
+}
+.nutrition-label .sub-nutrient .nutrient {
+    font-weight:400;
+    padding-left:5px;
+}
+.ingredients {
+    font-size:.7em;
+    line-height:.9em;
+    text-transform:uppercase;
+}
+.ingredients .title {
+    font-weight:900;
+    margin-right:5px;
+}
+

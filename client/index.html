@@ -13,15 +13,14 @@
     <body>
 
         <div id="wrapper">
-            <img src="img/logo.png" height="150px" />
             <h1>Rhino</h1>
             <nav>
                 <ul>
-                    <li><a href="/person-input">Profile</a></li>
-                    <li><a href="/product-search">Search Product</a></li>
+                    <li><a href="index.html#person-input">Profile</a></li>
+                    <li><a href="index.html#product-search">Search Product</a></li>
                 </ul>
             </nav>
-
+            <img src="img/logo.png" height="150px" />
             <div id="main"></div>
         </div>
 
@@ -30,12 +29,13 @@
         <script src="lib/underscore.js"></script>
         <script src="lib/backbone.js"></script>
         <script src="lib/jquery.total-storage.js"></script>
+        <script src="lib/jquery-cookie.js"></script>
 
         <script src="src/model/person.js"></script>
         <script src="src/model/product.js"></script>
         <script src="src/template/all.js"></script>
-        <script src="src/view/person.js"></script>
-        <script src="src/view/product.js"></script>
+        <script src="src/view/person_start.js"></script>
+        <script src="src/view/product_search.js"></script>
         <script src="src/main.js"></script>
 
     </body>

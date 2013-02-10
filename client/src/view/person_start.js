@@ -11,6 +11,7 @@ R.View = R.View || {};
 
     initialize: function() {
       _.bindAll('render');
+      console.log($.url('limit'));
     },
 
     events: {
@@ -24,7 +25,7 @@ R.View = R.View || {};
       return this;
     },
 
-    submitForm: function() {
+    submit: function() {
       var self = this;
       var formData = $(this.FROM).serialize();
       $.ajax({
@@ -33,8 +34,10 @@ R.View = R.View || {};
         type: 'GET',
         success: function(data) {
           var dailyLimit = data['limit'];
-          $.localStorage( 'limit', {data:dailyLimit} );
-          self.navigate('product-search');
+          console.log('daily limit ' + dailyLimit);
+          $.totalStorage( 'limit', dailyLimit);
+          console.log('limit cookie '+ $.totalStorage('limit'));
+          //self.navigate('product-search');
         }
       });
     }

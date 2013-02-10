@@ -32,13 +32,19 @@ def calculate_nutrient_percents(nutrients, daily_cal):
         name = nutrient['nutrient_name']
         if name != 'Calories':
             if daily_allowance.get(name, None) != None:
-                value = nutrient['nutrient_value']
-                if value == '':
-                    value = '0.0'
-
+                if nutrient['nutrient_value'] == '' or nutrient['nutrient_value'] == '0.0':
+                    value = 0
+                else:
+                    value = int(float(nutrient['nutrient_value']))
+                
                 uom = nutrient['nutrient_uom']
-                percentage = float(value)/daily_allowance[name] * 100
-                data[name] = {'Value': value,
+                percentage = value/daily_allowance[name] * 100
+                print name
+                print value
+                print daily_allowance[name]
+                print percentage
+                
+                data[name] = {'Value': int(value),
                         'uom': uom,
                         'Percent': ('%d' % percentage + '%')}
         else:

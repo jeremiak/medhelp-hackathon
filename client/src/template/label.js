@@ -2,6 +2,7 @@ R.Template = R.Template || {};
 
 R.Template.Label = {
   Start: ' \
+          <h2><%= item %></h2> \
           <div class="nutrition-label"> \
             <h1>Nutrition Facts</h1> \
             <h2>Serving Size <%= serving_size %> <%= serving_size_uom %></h2> \
@@ -50,7 +51,7 @@ R.Template.Label = {
             </div> \
             <div class="clear-fix"></div> \
             <div class="filled-in"></div> \
-            <h4>* Percent Daily Values are based on your <%= daily_calorie_limit %> calorie diet</h4> \
+            <h3>* Percent Daily Values are based on your <%= daily_calorie_limit %> calorie diet</h3> \
         </div> \
         <div class="ingredients"> \
             <span class="title">INGREDIENTS:</span><%= ingredients %> \

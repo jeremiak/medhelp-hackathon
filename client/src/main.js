@@ -43,8 +43,10 @@ R.Router = R.Router || {};
       $(R.Const.MAIN).empty();
       var authToken = $.url('access_token');
       var userId = $.url('user_id');
-      $.totalStorage( 'auth_token', authToken);
-      $.totalStorage( 'user_id', userId);
+      console.log('auth token ' + authToken);
+      $.totalStorage('auth_token', authToken);
+      console.log('auth_token cookie '+ $.totalStorage('auth_token'));
+      $.totalStorage('user_id', userId);
       this.navigate('person-input');
       window.location.reload();
     },

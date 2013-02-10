@@ -73,7 +73,9 @@ R.Router = R.Router || {};
 
   $.url = function(name){
     var results = new RegExp('[\\?&amp;]' + name + '=([^&amp;#]*)').exec(window.location.href);
-    return results[1] || 0;
+    if (results) {
+      return results[1] || 0;
+    } else { return 0; }
   }
 
   R.main = new R.Router.Main();

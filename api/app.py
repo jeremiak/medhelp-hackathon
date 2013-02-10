@@ -130,9 +130,7 @@ def handle_oauth_callback():
     data['code'] = code
 
     r = requests.post(url, data=data)
-
     j = r.json()
-    print j
     
     token = j['access_token']
     user_id = j['user_id']

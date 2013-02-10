@@ -11,7 +11,7 @@ R.Template.Label = {
             <h3 class="small-label">Amount Per Serving</h3>
             <div class="nutrition-fact">
                 <div class="nutrient">Calories</div>
-                <div class="nutrient-amount">70</div>
+                <div class="nutrient-amount"><%= calories_per_serving %></div>
             </div>
             <div class="clear-fix"></div>
             <div class="filled-in"></div>            
@@ -30,31 +30,31 @@ R.Template.Label = {
             <div class="clear-fix"></div> 
             <div class="nutrition-fact">
                 <div class="nutrient">Potassium</div>
-                <div class="nutrient-amount"></div>
-                <div class="percentage"></div>
+                <div class="nutrient-amount"><%= nutrients["Sodium"]["Value"] %><%= nutrients["Sodium"]["uom"] %></div>
+                <div class="percentage"><%= nutrients["Sodium"]["Percent"}%</div>
             </div>
             <div class="clear-fix"></div>    
             <div class="nutrition-fact">
                 <div class="nutrient">Total Carbohydrate</div>
-                <div class="nutrient-amount">20g</div>
-                <div class="percentage">7%</div>
+                <div class="nutrient-amount"><%= nutrients["Total Carbohydrate"]["Value"] %><%= nutrients["Total Carbohydrate"]["uom"] %></div>
+                <div class="percentage"><%= nutrients["Total Carbohydrate"]["Percent"}%</div>
             </div>
             <div class="clear-fix"></div>        
             <div class="nutrition-fact sub-nutrient">
                 <div class="nutrient">Sugars</div>
-                <div class="nutrient-amount">10g</div>
+                <div class="nutrient-amount"><%= nutrients["Sugars"]["Value"] %><%= nutrients["Sugars"]["uom"] %></div>
             </div>
             <div class="clear-fix"></div>
             <div class="nutrition-fact">
                 <div class="nutrient">Protein</div>
-                <div class="nutrient-amount">0g</div>
+                <div class="nutrient-amount"><%= nutrients["Protein"]["Value"] %><%= nutrients["Protein"]["uom"] %></div>
             </div>
             <div class="clear-fix"></div>
             <div class="filled-in"></div>
-            <h4>* Percent Daily Values are based on a 2,000 calorie diet</h4>
+            <h4>* Percent Daily Values are based on a <%= daily_calorie_intake %> calorie diet</h4>
         </div>
         <div class="ingredients">
-            <span class="title">INGREDIENTS:</span>WHOLE GRAIN OATS, SUGAR, CANOLA OIL, YELLOW CORN FLOUR, HONEY, SOY FLOUR, BROWN SUGAR SYRUP, SALT, SOY LECITHIN, BAKING SODA, NATURAL FLAVOR, CONTAINS SOY, MAY CONTAIN PEANUT, MAY CONTAIN ALMOND AND PECAN INGREDIENTS.
+            <span class="title">INGREDIENTS:</span><%= ingredients %>
         </div> 
   '
 };

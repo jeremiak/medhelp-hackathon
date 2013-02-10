@@ -40,7 +40,7 @@ def calculate_nutrient_percents(nutrients, daily_cal):
                 percentage = float(value)/daily_allowance[name] * 100
                 data[name] = {'Value': value,
                         'uom': uom,
-                        'Percent': '%.2f' % percentage}
+                        'Percent': '%d' % percentage}
         else:
             data['Calories'] = {'Value': nutrient['nutrient_value']}
     return data
@@ -104,7 +104,7 @@ def calculate_daily_intake():
     
     limit = bmr_and_activity - ((pounds_per_week * 3500) / 7)
 
-    return {'limit': '%.2f' % limit}
+    return {'limit': '%d' % limit}
 
 @get('/save_weight')
 @post('/save_weight')

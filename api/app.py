@@ -113,7 +113,7 @@ def save_weight():
 
     r = requests.post(url, headers=headers, data=json.dumps([data]))
 
-    print r.text
+    return r.text
 
 @get('/callback')
 def handle_oauth_callback():

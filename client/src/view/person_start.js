@@ -30,13 +30,12 @@ R.View = R.View || {};
       var self = this;
       var formData = {};
       $.each(this.$('#personInput').serializeArray(), function(i, field) {
-          console.log(i);
           formData[field.name] = field.value;
       });
       $.ajax({
         url: 'http://pacific-eyrie-4115.herokuapp.com/daily_limit',
         data: formData,
-        type: 'GET',
+        type: 'POST',
         success: function(data) {
           var dailyLimit = data['limit'];
           $.totalStorage( 'limit', dailyLimit);

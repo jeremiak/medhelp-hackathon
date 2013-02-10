@@ -18,7 +18,7 @@ R.Template.Label = {
             <div class="nutrition-fact"> \
                 <div class="nutrient">Total Fat</div> \
                 <div class="nutrient-amount"><%= nutrients["Total Fat"]["Value"] %><%= nutrients["Total Fat"]["uom"] %></div> \
-                <div class="percentage"><%= nutrients["Total Fat"]["Percent"]%></div>
+                <div class="percentage"><%= nutrients["Total Fat"]["Percent"]%></div> \
             </div> \
             <div class="clear-fix"></div> \
             <div class="nutrition-fact"> \
@@ -55,6 +55,6 @@ R.Template.Label = {
         <div class="ingredients"> \
             <span class="title">INGREDIENTS:</span><%= ingredients %> \
         </div> \
-        <a class="button search">search again</a> \
+        <a href="#" class="button search">search again</a> \
   '
 };

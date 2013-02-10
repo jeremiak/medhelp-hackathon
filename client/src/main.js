@@ -11,24 +11,32 @@ R.Router = R.Router || {};
       'init-person?*path': 'initPerson',
       'person-input': 'personInput',
       'person-input?*path': 'personInput',
-      'product-search?*path': 'productSearch',
-      'product-page?*path': 'productPage',
+      'product-search': 'productSearch',
+      'product-page': 'productPage',
       '*path':  'start'
     },
 
     initialize: function() {
+      var self = this;
       this.productModel = new R.Model.Product();
+      this.bind('product-search-page', function() {
+        self.navigate('product-search', {trigger: true});
+      });
+      this.bind('product-page', function() {
+        self.navigate('product-page', {trigger: true});
+
+      });
     },
 
     start: function() {
       if($.totalStorage('auth_token') === undefined) {
-        this.navigate('login');
+        this.navigate('login', {trigger: true});
       } else if ($.totalStorage('limit') === undefined) {
-        this.navigate('person-input');
+        this.navigate('person-input', {trigger: true});
       } else {
-        this.navigate('product-search');
+        this.navigate('product-search', {trigger: true});
       }
-      window.location.reload();
+      // window.location.reload();
     },
 
     login: function() {
@@ -66,7 +74,7 @@ R.Router = R.Router || {};
 
     productPage: function() {
       $(R.Const.MAIN).empty();
-      var productView = new R.View.ProductView({model: this.productModel});
+      var productView = new R.View.Product({model: this.productModel});
       $(R.Const.MAIN).append(productView.render().el);
     }
   });

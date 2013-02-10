@@ -11,7 +11,6 @@ R.View = R.View || {};
 
     initialize: function() {
       _.bindAll('render');
-      console.log($.url('limit'));
     },
 
     events: {
@@ -25,19 +24,22 @@ R.View = R.View || {};
       return this;
     },
 
-    submit: function() {
+    submit: function(ev) {
+      ev.preventDefault();
+      R.main.trigger('product-search-page');
       var self = this;
-      var formData = $(this.FROM).serialize();
+      var formData = {};
+      $.each(this.$('#personInput').serializeArray(), function(i, field) {
+          formData[field.name] = field.value;
+      });
       $.ajax({
         url: 'http://pacific-eyrie-4115.herokuapp.com/daily_limit',
         data: formData,
-        type: 'GET',
+        type: 'POST',
         success: function(data) {
           var dailyLimit = data['limit'];
-          console.log('daily limit ' + dailyLimit);
           $.totalStorage( 'limit', dailyLimit);
-          console.log('limit cookie '+ $.totalStorage('limit'));
-          //self.navigate('product-search');
+          R.main.trigger('product-search-page');
         }
       });
     }

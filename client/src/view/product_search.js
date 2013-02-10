@@ -24,9 +24,11 @@ R.View = R.View || {};
       return this;
     },
 
-    submit: function() {
+    submit: function(ev) {
+      ev.preventDefault();
       var self = this;
-      var formData = $(this.FROM).serializeArray();
+      var formData = {};
+      formData['upc'] = $('#productSearch').find('input[name=upc]').val();
       formData['access_token'] = $.totalStorage('auth_token');
       formData['user_id'] = $.totalStorage('user_id');
       formData['daily_cal'] = $.totalStorage('limit');
@@ -36,7 +38,7 @@ R.View = R.View || {};
         type: 'GET',
         success: function(data) {
           self.model.set(data);
-          R.main.navigate('product-page');
+          R.main.trigger('product-page');
         },
         error: function() {
           window.alert('Product not found');

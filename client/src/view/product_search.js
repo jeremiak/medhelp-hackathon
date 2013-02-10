@@ -25,6 +25,7 @@ R.View = R.View || {};
     },
 
     submitForm: function() {
+      var self = this;
       var formData = $(this.FROM).serializeArray();
       formData['access_token'] = $.totalStorage('auth_token');
       formData['user_id'] = $.totalStorage('user_id');
@@ -33,7 +34,8 @@ R.View = R.View || {};
         data: formData,
         type: 'GET',
         success: function(data) {
-          // Need to navigate to the product-page with passing data
+          self.model.set(data);
+          R.main.navigate('product-page');
         }
       });
     }

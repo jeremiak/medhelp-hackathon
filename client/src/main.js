@@ -11,8 +11,12 @@ R.Router = R.Router || {};
       'init-person?*path': 'initPerson',
       'person-input': 'personInput',
       'product-search': 'productSearch',
-      'product-page?*path': 'productPage',
+      'product-page': 'productPage',
       '*path':  'start'
+    },
+
+    initialize: function() {
+      this.productModel = new new R.Model.Product();
     },
 
     start: function() {
@@ -53,12 +57,16 @@ R.Router = R.Router || {};
 
     productSearch: function() {
       $(R.Const.MAIN).empty();
-      var productSearchView = new R.View.ProductSearch(callback);
+      var productSearchView = new R.View.ProductSearch({
+        model: this.productModel
+      });
       $(R.Const.MAIN).append(productSearchView.render().el);
     },
 
     productPage: function() {
-
+      $(R.Const.MAIN).empty();
+      var productView = new R.View.ProductView({model: this.productModel});
+      $(R.Const.MAIN).append(productView.render().el);
     }
   });
 

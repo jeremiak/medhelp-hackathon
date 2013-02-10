@@ -134,7 +134,7 @@ def handle_oauth_callback():
     
     token = j['access_token']
     user_id = j['user_id']
-    url = 'http://jeremiak.github.com/medhelp-hackathon/client/index.html?access_token=%s&user_id=%s' % (token, user_id)
+    url = 'http://jeremiak.github.com/medhelp-hackathon/client/index.html#init-person?access_token=%s&user_id=%s' % (token, user_id)
     redirect(url)
 
 @get('/status')

@@ -18,7 +18,7 @@ def calculate_nutrient_percents(nutrients, daily_cal):
     daily_allowance['Cholesterol'] = 0.15 * daily_cal
     daily_allowance['Sodium'] = 1.2 * daily_cal
     daily_allowance['Potassium'] = 1.75 * daily_cal
-    daily_allowance['Total Carbohydrate'] = 1.5 * daily_cal
+    daily_allowance['Total Carbohydrate'] = .15 * daily_cal
     daily_allowance['Sugars'] = 0.02 * daily_cal
     daily_allowance['Fiber'] = 0.0125 * daily_cal
     daily_allowance['Protein'] = 0.025 * daily_cal
@@ -39,16 +39,12 @@ def calculate_nutrient_percents(nutrients, daily_cal):
                 
                 uom = nutrient['nutrient_uom']
                 percentage = value/daily_allowance[name] * 100
-                print name
-                print value
-                print daily_allowance[name]
-                print percentage
                 
                 data[name] = {'Value': int(value),
                         'uom': uom,
                         'Percent': ('%d' % percentage + '%')}
         else:
-            data['Calories'] = {'Value': nutrient['nutrient_value']}
+            data['Calories'] = {'Value': int(float(nutrient['nutrient_value']))}
     return data
 
 @get('/search')

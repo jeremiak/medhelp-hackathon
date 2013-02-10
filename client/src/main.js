@@ -9,9 +9,9 @@ R.Router = R.Router || {};
     routes: {
       'login': 'login',
       'init-person?*path': 'initPerson',
-      'person-input': 'personInput',
-      'product-search': 'productSearch',
-      'product-page': 'productPage',
+      'person-input?*path': 'personInput',
+      'product-search?*path': 'productSearch',
+      'product-page?*path': 'productPage',
       '*path':  'start'
     },
 

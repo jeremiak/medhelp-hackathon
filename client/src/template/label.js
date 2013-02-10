@@ -50,7 +50,7 @@ R.Template.Label = {
             </div> \
             <div class="clear-fix"></div> \
             <div class="filled-in"></div> \
-            <h4>* Percent Daily Values are based on a <%= daily_calorie_limit %> calorie diet</h4> \
+            <h4>* Percent Daily Values are based on your <%= daily_calorie_limit %> calorie diet</h4> \
         </div> \
         <div class="ingredients"> \
             <span class="title">INGREDIENTS:</span><%= ingredients %> \

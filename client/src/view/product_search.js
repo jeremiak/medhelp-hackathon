@@ -40,8 +40,8 @@ R.View = R.View || {};
         success: function(data) {
           console.log('product search callback ');
           console.log(data);
-          self.model.set(data);
-          R.main.trigger('product-page');
+          // self.model.set(data);
+          // R.main.trigger('product-page');
         },
         error: function() {
           window.alert('Product not found');

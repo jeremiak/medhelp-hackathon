@@ -23,10 +23,15 @@ R.Router = R.Router || {};
     },
 
     personInput: function() {
-      $(R.Const.MAIN).addClass('personInput');
-      var template = _.template(R.Template.Person.Start);
-      var compiledHTML = template();
-      $(R.Const.MAIN).append(compiledHTML);
+      $(R.Const.MAIN).empty();
+      var personInputView = new R.View.PersonInput();
+      $(R.Const.MAIN).append(personInputView.render().el);
+    },
+
+    productSearch: function() {
+      $(R.Const.MAIN).empty();
+      var productSearchView = new R.View.ProductSearch();
+      $(R.Const.MAIN).append(productSearchView.render().el);
     }
   });
 

@@ -46,3 +46,15 @@ R.Template.Person = {
   </form> \
   '
 };
+
+R.Template.Product = {
+  Search: ' \
+  <h2>Find a product: </h2> \
+  <form id="productSearch" class="clearfix"> \
+    <label>Product UPC</label> \
+    <div class="right"> \
+      <input type="text" name="product_upc" /><span></span> \
+    </div> \
+  </form> \
+  '
+};

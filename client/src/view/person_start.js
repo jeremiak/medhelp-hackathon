@@ -11,6 +11,7 @@ R.View = R.View || {};
 
     initialize: function() {
       _.bindAll('render');
+      console.log($.url('limit'));
     },
 
     events: {

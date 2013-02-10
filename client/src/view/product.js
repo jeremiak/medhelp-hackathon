@@ -26,7 +26,7 @@ R.View = R.View || {};
 
     search: function(ev) {
       ev.preventDefault();
-      R.main.trigger('product-search-page' {trigger: true});
+      R.main.trigger('product-search-page', {trigger: true});
     }
 
   });

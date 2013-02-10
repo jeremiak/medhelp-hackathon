@@ -17,18 +17,26 @@ R.Router = R.Router || {};
     },
 
     initialize: function() {
+      var self = this;
       this.productModel = new R.Model.Product();
+      this.bind('product-search-page', function() {
+        self.navigate('product-search', {trigger: true});
+      });
+      this.bind('product-page', function() {
+        self.navigate('product-page', {trigger: true});
+
+      });
     },
 
     start: function() {
       if($.totalStorage('auth_token') === undefined) {
-        this.navigate('login');
+        this.navigate('login', {trigger: true});
       } else if ($.totalStorage('limit') === undefined) {
-        this.navigate('person-input');
+        this.navigate('person-input', {trigger: true});
       } else {
-        this.navigate('product-search');
+        this.navigate('product-search', {trigger: true});
       }
-      window.location.reload();
+      // window.location.reload();
     },
 
     login: function() {
@@ -57,6 +65,7 @@ R.Router = R.Router || {};
     },
 
     productSearch: function() {
+      console.log('on product serach page');
       $(R.Const.MAIN).empty();
       var productSearchView = new R.View.ProductSearch({
         model: this.productModel
@@ -65,6 +74,7 @@ R.Router = R.Router || {};
     },
 
     productPage: function() {
+      console.log('on product  page');
       $(R.Const.MAIN).empty();
       var productView = new R.View.ProductView({model: this.productModel});
       $(R.Const.MAIN).append(productView.render().el);

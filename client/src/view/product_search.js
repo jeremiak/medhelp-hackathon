@@ -26,6 +26,7 @@ R.View = R.View || {};
 
     submit: function(ev) {
       ev.preventDefault();
+      R.main.trigger('product-page');
       var self = this;
       var formData = {};
       formData['upc'] = $(this.FROM).find('input[name="upc"]').val();
@@ -38,7 +39,7 @@ R.View = R.View || {};
         type: 'GET',
         success: function(data) {
           self.model.set(data);
-          R.main.navigate('product-page');
+          R.main.trigger('product-page');
         },
         error: function() {
           window.alert('Product not found');

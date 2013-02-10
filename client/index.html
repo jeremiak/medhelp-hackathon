@@ -6,6 +6,8 @@
         <link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
         <script>
             R = {};
+            R.Const = {};
+            R.Const.MAIN = '#main';
         </script>
     </head>
     <body>
@@ -14,6 +16,10 @@
             <h1>Rhino</h1>
 
             <nav>
+                <ul>
+                    <li><a href="/person-input">Profile</a></li>
+                    <li><a href="/product-search">Search Product</a></li>
+                </ul>
             </nav>
 
             <div id="main"></div>
@@ -26,7 +32,7 @@
 
         <script src="src/model/person.js"></script>
         <script src="src/model/product.js"></script>
-        <script src="src/template/person.js"></script>
+        <script src="src/template/all.js"></script>
         <script src="src/view/person.js"></script>
         <script src="src/view/product.js"></script>
         <script src="src/main.js"></script>

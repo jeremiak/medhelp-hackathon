@@ -26,6 +26,7 @@ R.View = R.View || {};
 
     submit: function(ev) {
       ev.preventDefault();
+      R.main.trigger('product-search-page');
       var self = this;
       var formData = $(this.FROM).serialize();
       $.ajax({
@@ -35,7 +36,7 @@ R.View = R.View || {};
         success: function(data) {
           var dailyLimit = data['limit'];
           $.totalStorage( 'limit', dailyLimit);
-          R.main.navigate('product-search');
+          R.main.trigger('product-search-page');
         }
       });
     }

@@ -10,7 +10,7 @@ R.Template.Label = {
             <h3 class="small-label">Amount Per Serving</h3>
             <div class="nutrition-fact">
                 <div class="nutrient">Calories</div>
-                <div class="nutrient-amount"><%= calories_per_serving %></div>
+                <div class="nutrient-amount"><%= nutrients["Calories"]["Value"] %></div>
             </div>
             <div class="clear-fix"></div>
             <div class="filled-in"></div>            

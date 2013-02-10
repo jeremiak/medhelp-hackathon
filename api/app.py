@@ -35,11 +35,11 @@ def calculate_nutrient_percents(nutrients, daily_cal):
 
             uom = nutrient['nutrient_uom']
             
-            percentage = str((float(value)/daily_allowance[name]) * 100)
+            percentage = float(value)/daily_allowance[name] * 100
 
             data[name] = {'Value': value,
                     'uom': uom,
-                    'Percent': percentage}
+                    'Percent': '%.2f' % percentage}
 
     return data
 
@@ -95,7 +95,7 @@ def calculate_daily_intake():
     print activity_level
     print limit
 
-    return {'limit': limit}
+    return {'limit': '%.2f' % limit}
 
 @get('/status')
 def return_status():

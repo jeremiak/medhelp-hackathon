@@ -78,13 +78,14 @@ def calculate_daily_intake():
     for param in request.query.keys():
         print "%s: %s" % (param, request.query.get(param))
 
-    age = int(request.query.get('age', '25'))
-    height = int(request.query.get('height', '70'))
-    current_weight = int(request.query.get('current_weight', '250'))
-    goal_weight = int(request.query.get('goal_weight', '180'))
-    weeks_to_goal = int(request.query.get('weeks_to_goal', '10'))
-    gender = request.query.get('gender', 'male').lower()
-    activity_level = request.query.get('activity_level', 'moderately active').lower()
+    age = int(request.forms.get('age', '25'))
+    height = int(request.form.get('height', '70'))
+    current_weight = int(request.form.get('current_weight', '190'))
+    goal_weight = int(request.form.get('goal_weight', '180'))
+    weeks_to_goal = int(request.form.get('weeks_to_goal', '10'))
+    gender = request.form.get('gender', 'male').lower()
+    activity_level = request.form.get('activity_level', 'moderately active').lower()
+
 
     pounds_per_week = (current_weight - goal_weight) / weeks_to_goal
 

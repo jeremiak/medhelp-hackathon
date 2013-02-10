@@ -43,7 +43,64 @@ h1, h2, h3, h4, h5 {
   margin-top: 0;
 }
 h1 { margin-bottom: 0px; }
+h2 { margin-bottom: 2px; }
+h3 { margin-bottom: 2px; }
 
+form label {
+  float: left;
+	text-align: right;
+	margin-right: 15px;
+  width: 160px;
+}
+
+.clearfix:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: " ";
+	clear: both;
+	height: 0;
+	}
+* html .clearfix             { zoom: 1; } /* IE6 */
+*:first-child+html .clearfix { zoom: 1; } /* IE7 */
+
+.button {
+  display: inline-block;
+  border: 1px solid #D6D6D6;
+  padding: 2px 15px;
+  background: #E0E0E0;
+  border-radius: 4px;
+  box-shadow : 0 1px 4px rgba(0,0,0,.6);
+  text-shadow : 0 1px 3px rgba(0,0,0,.4);
+  text-decoration : none;
+  color: #484848;
+}
+
+.centered {
+  text-align: center;
+}
+
+.submitForm {
+  margin-top: 20px;
+}
+
+nav {
+  height: 25px;
+  background: #373737;
+}
+nav ul {
+  margin: 0;
+  padding: 0;
+}
+nav ul li {
+  display: inline-block;
+  list-style: none;
+  margin: 0 10px;
+}
+nav ul li a {
+  text-decoration: none;
+  color: #fff;
+}
 
 /*
  * Main
@@ -60,7 +117,6 @@ body {
   -webkit-box-shadow: 0px 0px 8px #ccc;
   box-shadow: 0px 0px 8px #ccc;
 }
-nav {
-  height: 25px;
-  background: #373737;
+.loginButton {
+  margin: 30px auto;
 }

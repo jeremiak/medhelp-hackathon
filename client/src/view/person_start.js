@@ -36,7 +36,7 @@ R.View = R.View || {};
           console.log('daily limit ' + dailyLimit);
           $.totalStorage( 'limit', dailyLimit);
           console.log('limit cookie '+ $.totalStorage('limit'));
-          self.navigate('product-search');
+          //self.navigate('product-search');
         }
       });
     }

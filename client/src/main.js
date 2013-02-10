@@ -7,11 +7,23 @@ R.Router = R.Router || {};
   R.Router.Main = Backbone.Router.extend({
 
     routes: {
-      '*actions': 'login',
-      'init-person': 'initPerson',
+      'login': 'login',
+      'init-person?*path': 'initPerson',
       'person-input': 'personInput',
       'product-search': 'productSearch',
-      'product-page': 'productPage'
+      'product-page': 'productPage',
+      '*path':  'start'
+    },
+
+    start: function() {
+      if(!$.totalStorage('auth_token')) {
+        this.navigate('login');
+      } else if (!$.totalStorage('limit')) {
+        this.navigate('person-input');
+      } else {
+        this.navigate('product-search');
+      }
+      window.location.reload();
     },
 
     login: function() {
@@ -23,12 +35,14 @@ R.Router = R.Router || {};
       $(R.Const.MAIN).append($loginButton);
     },
 
-    personInit: function() {
+    initPerson: function() {
+      $(R.Const.MAIN).empty();
       var authToken = $.url('access_token');
       var userId = $.url('user_id');
-      $.localStorage( 'auth_token', {data:authToken});
-      $.localStorage( 'user_id', {data:userId});
+      $.totalStorage( 'auth_token', authToken);
+      $.totalStorage( 'user_id', userId);
       this.navigate('person-input');
+      window.location.reload();
     },
 
     personInput: function() {
@@ -44,7 +58,12 @@ R.Router = R.Router || {};
     }
   });
 
+  $.url = function(name){
+    var results = new RegExp('[\\?&amp;]' + name + '=([^&amp;#]*)').exec(window.location.href);
+    return results[1] || 0;
+  }
+
   var main = new R.Router.Main();
-  Backbone.history.start();
+  Backbone.history.start({root: 'index.html'});
 
 })(R, _, $, Backbone);

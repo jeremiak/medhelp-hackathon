@@ -50,7 +50,10 @@ form label {
   float: left;
 	text-align: right;
 	margin-right: 15px;
-  width: 160px;
+  width: 130px;
+}
+form input {
+  width: 80px;
 }
 
 .clearfix:after {

@@ -17,6 +17,7 @@ R.View = R.View || {};
     },
 
     render: function() {
+      console.log(this.model.attributes);
       this.compiledHTML = this.template(this.model.toJSON());
       this.$el.html(this.compiledHTML);
 

@@ -65,7 +65,6 @@ R.Router = R.Router || {};
     },
 
     productSearch: function() {
-      console.log('on product serach page');
       $(R.Const.MAIN).empty();
       var productSearchView = new R.View.ProductSearch({
         model: this.productModel
@@ -74,7 +73,6 @@ R.Router = R.Router || {};
     },
 
     productPage: function() {
-      console.log('on product  page');
       $(R.Const.MAIN).empty();
       var productView = new R.View.Product({model: this.productModel});
       $(R.Const.MAIN).append(productView.render().el);

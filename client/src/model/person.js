@@ -8,4 +8,4 @@ R.Model = R.Model || {};
     initialize: function() {  }
   });
 
-})();
+})(R, _, $, Backbone);

@@ -8,4 +8,4 @@ R.View = R.View || {};
     initialize: function() {  }
   });
 
-})();
+})(R, _, $, Backbone);

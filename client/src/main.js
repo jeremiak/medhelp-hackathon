@@ -10,6 +10,7 @@ R.Router = R.Router || {};
       'login': 'login',
       'init-person?*path': 'initPerson',
       'person-input': 'personInput',
+      'person-input?*path': 'personInput',
       'product-search?*path': 'productSearch',
       'product-page?*path': 'productPage',
       '*path':  'start'
@@ -20,9 +21,9 @@ R.Router = R.Router || {};
     },
 
     start: function() {
-      if(!$.totalStorage('auth_token')) {
+      if($.totalStorage('auth_token') === undefined) {
         this.navigate('login');
-      } else if (!$.totalStorage('limit')) {
+      } else if ($.totalStorage('limit') === undefined) {
         this.navigate('person-input');
       } else {
         this.navigate('product-search');

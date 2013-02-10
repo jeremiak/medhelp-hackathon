@@ -29,11 +29,11 @@ R.View = R.View || {};
       var authToken = $.localStorage('auth_token').data;
       var userId = $.localStorage('user_id').data;
       $.ajax({
-        url: 'http://pacific-eyrie-4115.herokuapp.com/daily_limit',
+        url: 'http://pacific-eyrie-4115.herokuapp.com/search',
         data: formData,
         type: 'GET',
         success: function() {
-          // once daily limit is set init person model
+          // what do now? we have to go to a new page, but need GET params
         }
       });
     }

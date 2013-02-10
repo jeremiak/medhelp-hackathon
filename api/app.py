@@ -1,7 +1,7 @@
 from datetime import datetime
 from os import environ
 
-from bottle import get, redirect, request, response, run
+from bottle import get, post, redirect, request, response, run
 import requests
 import simplejson as json
 
@@ -69,7 +69,7 @@ def search_upc():
 
     return data
 
-@get('/daily_limit')
+@post('/daily_limit')
 def calculate_daily_intake():
     response.headers['Access-Control-Allow-Origin'] = '*'
     

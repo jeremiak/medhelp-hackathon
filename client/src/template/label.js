@@ -55,6 +55,6 @@ R.Template.Label = {
         <div class="ingredients"> \
             <span class="title">INGREDIENTS:</span><%= ingredients %> \
         </div> \
-        <a class="button search">search again</a> \
+        <a href="#" class="button search">search again</a> \
   '
 };

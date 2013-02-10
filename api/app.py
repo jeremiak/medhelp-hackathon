@@ -44,7 +44,7 @@ def calculate_nutrient_percents(nutrients, daily_cal):
     return data
 
 @get('/search')
-def search():
+def search_upc():
     response.headers['Access-Control-Allow-Origin'] = '*'
 
     upc = request.query.get('upc', '016000264601')
@@ -56,6 +56,46 @@ def search():
     data = {'nutrients': nutrients}
 
     return data
+
+@get('/daily_limit')
+def calculate_daily_intake():
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    
+    age = int(request.query.get('age', '25'))
+    height = int(request.query.get('height', '70'))
+    current_weight = int(request.query.get('current_weight', '150'))
+    goal_weight = int(request.query.get('goal_weight', '100'))
+    weeks_to_goal = int(request.query.get('weeks_to_goal', '4'))
+    gender = request.query.get('gender', 'male').lower()
+    activity_level = request.query.get('activity_level', 'moderately active').lower()
+
+    pounds_per_week = (current_weight - goal_weight) / weeks_to_goal
+
+    if gender == 'male':
+        bmr = 66 + (6.3 * current_weight) + (12.9 * height) - (6.8 * age)
+    else:
+        bmr = 655 + (4.3 * current_weight) + (4.7 * height) - (4.7 * age)
+
+    if activity_level == 'sedentary':
+        bmr_and_activity = 1.2 * bmr
+    elif activity_level == 'lightly active':
+        bmr_and_activity = 1.3 * bmr
+    elif activity_level == 'moderately active':
+        bmr_and_activity = 1.4 * bmr
+    elif activity_level == 'very active':
+        bmr_and_activity = 1.5 * bmr
+    
+    limit = bmr_and_activity - ((pounds_per_week * 3500) / 7)
+
+    print age
+    print height
+    print current_weight
+    print goal_weight
+    print gender
+    print activity_level
+    print limit
+
+    return {'limit': limit}
 
 @get('/status')
 def return_status():

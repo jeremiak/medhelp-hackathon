@@ -124,7 +124,7 @@ def handle_oauth_callback():
     data['authorize'] = 'Yes'
     data['grant_type'] = 'authorization-code'
     data['response_type'] = 'code'
-    data['redirect_uri'] = 'http://0.0.0.0:5000/callback'
+    data['redirect_uri'] = 'http://pacific-eyrie-4115.herokuapp.com/callback'
     data['client_id'] = 'e7fc52ddd676d34660c05022e1c26fe822c4b2fe4f7555d52500007ecad5063f'
     data['client_secret'] = 'd7daa38353fe6e9a904630ab4e57cf56809449010b7ea0636699e60b7e84b6e7'
     data['code'] = code

@@ -1,3 +1,4 @@
+from datetime import datetime
 from os import environ
 
 from bottle import get, redirect, request, response, run
@@ -93,6 +94,26 @@ def calculate_daily_intake():
     limit = bmr_and_activity - ((pounds_per_week * 3500) / 7)
 
     return {'limit': '%.2f' % limit}
+
+@get('/save_weight')
+def save_weight():
+    user_id = request.query.get('user_id', None)
+    access_token = request.query.get('access_token', None)
+    weight = request.query.get('weight', None)
+
+    d = datetime.today()
+    date = '%s-%s-%s' % (d.year, d.month, d.day)
+
+    url = "https://hapi.medhelp.ws/v1/users/%s/vitals?client_id=e7fc52ddd676d34660c05022e1c26fe822c4b2fe4f7555d52500007ecad5063f" % user_id
+    headers = {'Authorization': 'Token token="%s"' % access_token}
+    data = {'date': date,
+            'field_name': 'Weight',
+            'value': weight,
+            'user_id': user_id}
+
+    r = requests.post(url, headers=headers, data=json.dumps([data]))
+
+    print r.text
 
 @get('/callback')
 def handle_oauth_callback():

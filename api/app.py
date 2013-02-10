@@ -46,6 +46,7 @@ def calculate_nutrient_percents(nutrients, daily_cal):
     return data
 
 @get('/search')
+@post('/search')
 def search_upc():
     response.headers['Access-Control-Allow-Origin'] = '*'
 
@@ -69,6 +70,7 @@ def search_upc():
 
     return data
 
+@get('/daily_limit')
 @post('/daily_limit')
 def calculate_daily_intake():
     response.headers['Access-Control-Allow-Origin'] = '*'
@@ -105,6 +107,7 @@ def calculate_daily_intake():
     return {'limit': '%.2f' % limit}
 
 @get('/save_weight')
+@post('/save_weight')
 def save_weight():
     user_id = request.query.get('user_id', None)
     access_token = request.query.get('access_token', None)
@@ -147,6 +150,7 @@ def handle_oauth_callback():
     redirect(url)
 
 @get('/status')
+@post('/status')
 def return_status():
     response.headers['Access-Control-Allow-Origin'] = '*'
     

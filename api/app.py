@@ -26,21 +26,23 @@ def calculate_nutrient_percents(nutrients, daily_cal):
     daily_allowance['Vitamin C'] = 0.03 * daily_cal
     daily_allowance['Calcium'] = 0.5 * daily_cal
     daily_allowance['Iron'] = 0.009 * daily_cal
-    
+
     data = {}
     for nutrient in nutrients:
         name = nutrient['nutrient_name']
-        if daily_allowance.get(name, None) != None:
-            value = nutrient['nutrient_value']
-            if value == '':
-                value = '0.0'
+        if name != 'Calories':
+            if daily_allowance.get(name, None) != None:
+                value = nutrient['nutrient_value']
+                if value == '':
+                    value = '0.0'
 
-            uom = nutrient['nutrient_uom']
-            percentage = float(value)/daily_allowance[name] * 100
-            data[name] = {'Value': value,
-                    'uom': uom,
-                    'Percent': '%.2f' % percentage}
-
+                uom = nutrient['nutrient_uom']
+                percentage = float(value)/daily_allowance[name] * 100
+                data[name] = {'Value': value,
+                        'uom': uom,
+                        'Percent': '%.2f' % percentage}
+        else:
+            data['Calories'] = {'Value': nutrient['nutrient_value']}
     return data
 
 @get('/search')
@@ -59,7 +61,8 @@ def search_upc():
             'serving_size_uom': product['serving_size_uom'],
             'servings_per_container': product['servings_per_container'],
             'nutrients': nutrients, 
-            'ingredients': product['ingredients']}
+            'ingredients': product['ingredients'],
+            'daily_calorie_limit': daily_calorie_limit}
 
     return data
 

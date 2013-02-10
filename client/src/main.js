@@ -12,7 +12,7 @@ R.Router = R.Router || {};
       'person-input': 'personInput',
       'person-input?*path': 'personInput',
       'product-search?*path': 'productSearch',
-      'product-page?': 'productPage',
+      'product-page': 'productPage',
       '*path':  'start'
     },
 

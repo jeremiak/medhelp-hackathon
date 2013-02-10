@@ -24,7 +24,7 @@ R.View = R.View || {};
       return this;
     },
 
-    submitForm: function() {
+    submit: function() {
       var self = this;
       var formData = $(this.FROM).serialize();
       $.ajax({
@@ -33,7 +33,7 @@ R.View = R.View || {};
         type: 'GET',
         success: function(data) {
           var dailyLimit = data['limit'];
-          $.localStorage( 'limit', {data:dailyLimit} );
+          $.totalStorage( 'limit', {data:dailyLimit} );
           self.navigate('product-search');
         }
       });

@@ -11,7 +11,7 @@ R.Router = R.Router || {};
       'init-person?*path': 'initPerson',
       'person-input': 'personInput',
       'product-search': 'productSearch',
-      'product-page': 'productPage',
+      'product-page?*path': 'productPage',
       '*path':  'start'
     },
 
@@ -53,8 +53,12 @@ R.Router = R.Router || {};
 
     productSearch: function() {
       $(R.Const.MAIN).empty();
-      var productSearchView = new R.View.ProductSearch();
+      var productSearchView = new R.View.ProductSearch(callback);
       $(R.Const.MAIN).append(productSearchView.render().el);
+    },
+
+    productPage: function() {
+
     }
   });
 
@@ -63,7 +67,7 @@ R.Router = R.Router || {};
     return results[1] || 0;
   }
 
-  var main = new R.Router.Main();
+  R.main = new R.Router.Main();
   Backbone.history.start({root: 'index.html'});
 
 })(R, _, $, Backbone);

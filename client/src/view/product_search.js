@@ -27,7 +27,7 @@ R.View = R.View || {};
     submit: function(ev) {
       ev.preventDefault();
       var self = this;
-      formData = {};
+      var formData = {};
       formData['upc'] = $(this.FROM).find('input[name="upc"]').val();
       formData['access_token'] = $.totalStorage('auth_token');
       formData['user_id'] = $.totalStorage('user_id');

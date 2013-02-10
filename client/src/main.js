@@ -11,8 +11,8 @@ R.Router = R.Router || {};
       'init-person?*path': 'initPerson',
       'person-input': 'personInput',
       'person-input?*path': 'personInput',
-      'product-search?*path': 'productSearch',
-      'product-page?*path': 'productPage',
+      'product-search': 'productSearch',
+      'product-page': 'productPage',
       '*path':  'start'
     },
 

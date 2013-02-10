@@ -38,7 +38,7 @@ R.View = R.View || {};
         data: formData,
         type: 'GET',
         success: function(data) {
-          console.log('product search callback ' + data);
+          console.log('product search callback ');
           console.log(data);
           self.model.set(data);
           R.main.trigger('product-page');

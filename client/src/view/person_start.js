@@ -28,7 +28,10 @@ R.View = R.View || {};
       ev.preventDefault();
       R.main.trigger('product-search-page');
       var self = this;
-      var formData = $(this.FROM).serialize();
+      var formData = {};
+      $.each(this.$('#personInput').serializeArray(), function(i, field) {
+          formData[field.name] = field.value;
+      });
       $.ajax({
         url: 'http://pacific-eyrie-4115.herokuapp.com/daily_limit',
         data: formData,

@@ -24,8 +24,9 @@ R.View = R.View || {};
       return this;
     },
 
-    search: function() {
-      R.main.navigate('product-search');
+    search: function(ev) {
+      ev.preventDefault();
+      R.main.trigger('product-search-page', {trigger: true});
     }
 
   });

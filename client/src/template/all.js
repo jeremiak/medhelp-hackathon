@@ -35,7 +35,8 @@ R.Template.Person = {
     <label>Activity Level</label> \
     <div class="right"> \
       <select name="activity_level"> \
-        <option value="inactive">Inactive</option> \
+        <option value="sedentary">Sedentary</option> \
+        <option value="lightly active">Ligtly Active</option> \
         <option value="moderately_active">Moderately Active</option> \
         <option value="very_active">Very Active</option> \
       </select> \

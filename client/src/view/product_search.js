@@ -26,10 +26,9 @@ R.View = R.View || {};
 
     submit: function(ev) {
       ev.preventDefault();
-      R.main.trigger('product-page');
       var self = this;
       var formData = {};
-      formData['upc'] = $(this.FROM).find('input[name="upc"]').val();
+      formData['upc'] = $('#productSearch').find('input[name=upc]').val();
       formData['access_token'] = $.totalStorage('auth_token');
       formData['user_id'] = $.totalStorage('user_id');
       formData['daily_cal'] = $.totalStorage('limit');
@@ -38,7 +37,6 @@ R.View = R.View || {};
         data: formData,
         type: 'GET',
         success: function(data) {
-          console.log(data);
           self.model.set(data);
           R.main.trigger('product-page');
         },

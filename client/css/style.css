@@ -76,6 +76,10 @@ form label {
   color: #484848;
 }
 
+.clear {
+  clear:both;
+}
+
 .centered {
   text-align: center;
 }
@@ -199,4 +203,3 @@ body {
     font-weight:900;
     margin-right:5px;
 }
-

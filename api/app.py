@@ -5,6 +5,8 @@ from bottle import get, post, redirect, request, response, run
 import requests
 import simplejson as json
 
+FOOD_API = 'http://api.foodessentials.com/%s'
+MASHERY_KEY = environ.get('MASHERY_KEY')
 def get_food_label(upc):
     url = 'http://api.foodessentials.com/labelarray?u=%s&sid=ec005ec5-eda3-4bdc-8ebd-479d7920f264&n=1&s=0&f=json&api_key=v2ub5nu4ka8w74uyqtwdw92u' % upc
     r = requests.get(url)
@@ -150,6 +152,115 @@ def handle_oauth_callback():
     user_id = j['user_id']
     url = 'http://jeremiak.github.com/medhelp-hackathon/client/index.html#init-person?access_token=%s&user_id=%s' % (token, user_id)
     redirect(url)
+
+@post('/set_food_profile')
+def set_food_profile():
+
+    true_nutrients = ['Calcium', 'Calories', 'Calories from Fat', 'Cholesterol', 'Dietary Fiber', 'Insoluble Fiber', 'Iron',
+            'Monounsaturated Fat', 'Other Carbohydrate', 'Polyunsaturated Fat', 'Potassium', 'Protein', 'Saturated Fat',
+            'Saturated Fat Calories', 'Sodium', 'Soluble Fiber', 'Sugar Alcohol', 'Sugars', 'Total Carbohydrate',
+            'Total Fat', 'Vitamin A', 'Vitamin C']
+
+    nutrients = []
+    for nutrient in true_nutrients:
+        n = {"name": nutrient, "value": "true"}
+        nutrients.append(n)
+    
+    session_id = request.forms.get('session_id', None)
+
+    cereal_allergy = request.forms.get('cereal_allergy', 'false')
+    coconut_allergy = request.forms.get('coconut_allergy', 'false')
+    corn_allergy = request.forms.get('corn_allergy', 'false')
+    egg_allergy = request.forms.get('egg_allergy', 'false')
+    fish_allergy = request.forms.get('fish_allergy', 'false')
+    gluten_allergy = request.forms.get('gluten_allergy', 'false')
+    lactose_allergy = request.forms.get('lactose_allergy', 'false')
+    milk_allergy = request.forms.get('milk_allergy', 'false')
+    peanuts_allergy = request.forms.get('peanuts_allergy', 'false')
+    sesame_seed_allergy = request.forms.get('sesame_seed_allergy', 'false')
+    shellfish_allergy = request.forms.get('shellfish_allergy', 'false')
+    soybean_allergy = request.forms.get('soybean_allergy', 'false')
+    sulfites_allergy = request.forms.get('sulfites_allergy', 'false')
+    tree_nuts_allergy = request.forms.get('tree_nuts_allergy', 'false')
+    wheat_allergy = request.forms.get('wheat_allergy', 'false')
+  
+    allergens=  [{"name": "Cereals","value": cereal_allergy},
+            {"name": "Coconut","value": coconut_allergy},
+            {"name": "Corn","value": corn_allergy},
+            {"name": "Egg","value": egg_allergy}, 
+            {"name": "Fish","value": fish_allergy},
+            {"name": "Gluten","value": gluten_allergy},
+            {"name": "Lactose","value": lactose_allergy},
+            {"name": "Milk","value": milk_allergy},
+            {"name": "Peanuts","value": peanuts_allergy},
+            {"name": "Sesame Seeds","value": sesame_seed_allergy},
+            {"name": "Shellfish","value": shellfish_allergy},
+            {"name": "Soybean","value": soybean_allergy},
+            {"name": "Sulfites","value": sulfites_allergy},
+            {"name": "Tree Nuts","value": tree_nuts_allergy},
+            {"name": "Wheat","value": wheat_allergy}]
+
+    additives = [{"name": "Acidity Regulator","value": "false"},
+            {"name": "Added Sugar","value": "false"},
+            {"name": "Anti-Caking Agents","value": "false"},
+            {"name": "Anti-Foaming Agent","value": "false"},
+            {"name": "Antioxidants","value": "false"},
+            {"name": "Artificial Color","value": "false"},
+            {"name": "Artificial Flavoring Agent","value": "false"},
+            {"name": "Artificial Preservative","value": "false"},
+            {"name": "Bulking Agents","value": "false"},
+            {"name": "Colors","value": "false"},
+            {"name": "Emulsifiers","value": "false"},
+            {"name": "Enzyme","value": "false"},
+            {"name": "Firming Agent","value": "false"},
+            {"name": "Flavor Enhancer","value": "false"},
+            {"name": "Flour Treating Agent","value": "false"},
+            {"name": "Food Acids","value": "false"},
+            {"name": "Gelling Agents","value": "false"},
+            {"name": "Glazing Agent","value": "false"},
+            {"name": "Humectants","value": "false"},
+            {"name": "Leavening Agent","value": "false"},
+            {"name": "Mineral Salt","value": "false"},
+            {"name": "Natural Color","value": "false"},
+            {"name": "Natural Flavoring Agent","value": "false"},
+            {"name": "Natural Preservative","value": "false"},
+            {"name": "Preservatives","value": "false"},
+            {"name": "Propellant","value": "false"},
+            {"name": "Raising Agents","value": "false"},
+            {"name": "Saturated Fat","value": "false"},
+            {"name": "Sequestrant","value": "false"},
+            {"name": "Stabilizers","value": "false"},
+            {"name": "Sweeteners","value": "false"},
+            {"name": "Thickeners","value": "false"},
+            {"name": "Trans Fat","value": "false"},
+            {"name": "Unsaturated Fat","value": "false"},
+            {"name": "Vegetable Gum","value": "false"}]
+
+    params = {'sid': session_id, 'nutrients': nutrients, 'allergens': allergens, 'additives': additives, 'myingredients': [], 'mysort': []}
+
+    x = json.dumps({'json': params})
+
+    r = requests.post((FOOD_API % 'setprofile'), params=x, data={'api_key': MASHERY_KEY})
+
+    return r.status_code
+
+@get('/create_food_api_session')
+def create_session():
+
+    uid = request.query.get('uid', 'rhino_user')
+    devid = request.query.get('devid', 'rhino_device')
+
+    params = {}
+    params['uid'] = uid
+    params['devid'] = devid
+    params['api_key'] = MASHERY_KEY
+    params['f'] = 'json'
+
+    r = requests.get((FOOD_API % 'createsession'), params=params)
+
+    session_id = r.json.get('session_id', None)
+    
+    return session_id
 
 @get('/status')
 @post('/status')

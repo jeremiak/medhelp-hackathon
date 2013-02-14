@@ -1,4 +1,3 @@
-
 R.Router = R.Router || {};
 
 (function(R, _, $, Backbone) {
@@ -33,7 +32,7 @@ R.Router = R.Router || {};
         var url = 'http://pacific-eyrie-4115.herokuapp.com/set_profile?uid=rhino_user&devid=rhino_device';        
         $.ajax({
            url: url,
-               type: 'GET',
+               type: 'POST',
                success: function(data) {
                    console.log('session id successfully returned: ' + data)
                    $.totalStorage('sid', data);

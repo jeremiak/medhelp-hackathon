@@ -32,7 +32,7 @@ R.Router = R.Router || {};
         var url = 'http://pacific-eyrie-4115.herokuapp.com/create_food_api_session?uid=rhino_user&devid=rhino_device';        
         $.ajax({
            url: url,
-               type: 'POST',
+               type: 'GET',
                success: function(data) {
                    console.log('session id successfully returned: ' + data)
                    $.totalStorage('sid', data);

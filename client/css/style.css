@@ -50,7 +50,10 @@ form label {
   float: left;
 	text-align: right;
 	margin-right: 15px;
-  width: 160px;
+  width: 130px;
+}
+form input {
+  width: 80px;
 }
 
 .clearfix:after {
@@ -140,6 +143,7 @@ body {
     padding:2px;
 }
 .nutrition-label {
+    margin-top: 10px;
     border: 1px solid black;
     display:block;
 }
@@ -165,7 +169,7 @@ body {
 .nutrition-label h4 {
     border-top:1px solid black;
     font-weight:400;
-    font-size:.5em;
+    font-size: 0.8em;
 }
 .small-label {
     font-weight:900;

@@ -7,9 +7,12 @@ import simplejson as json
 
 FOOD_API = 'http://api.foodessentials.com/%s'
 MASHERY_KEY = environ.get('MASHERY_KEY')
-def get_food_label(upc):
-    url = 'http://api.foodessentials.com/labelarray?u=%s&sid=ec005ec5-eda3-4bdc-8ebd-479d7920f264&n=1&s=0&f=json&api_key=v2ub5nu4ka8w74uyqtwdw92u' % upc
-    r = requests.get(url)
+
+def get_food_label(upc, session_id):
+    params = {}
+    params['u'] = upc
+    params['sid'] = session_id
+    r = requests.get((FOOD_API % 'labelarray'), params=params, data={'api_key': MASHERY_KEY})
 
     return r.json()
 
@@ -49,31 +52,6 @@ def calculate_nutrient_percents(nutrients, daily_cal):
             data['Calories'] = {'Value': int(float(nutrient['nutrient_value']))}
     return data
 
-@get('/search')
-@post('/search')
-def search_upc():
-    response.headers['Access-Control-Allow-Origin'] = '*'
-
-    for param in request.query.keys():
-        print "%s: %s" % (param, request.query.get(param))
-
-    upc = request.query.get('upc', '016000264601')
-    daily_calorie_limit = float(request.query.get('daily_cal', '2000'))
-
-    label = get_food_label(upc)
-    product = label['productsArray'][0]
-    nutrients = calculate_nutrient_percents(product['nutrients'], daily_calorie_limit)
-    
-    data = {'item': product['product_name'],
-            'serving_size': product['serving_size'],
-            'serving_size_uom': product['serving_size_uom'],
-            'servings_per_container': product['servings_per_container'],
-            'nutrients': nutrients, 
-            'ingredients': product['ingredients'],
-            'daily_calorie_limit': daily_calorie_limit}
-
-    return data
-
 def calculate_daily_intake(age, height, current_weight, goal_weight, weeks_to_goal, gender, activity_level):
     pounds_per_week = (current_weight - goal_weight) / weeks_to_goal
 
@@ -95,17 +73,42 @@ def calculate_daily_intake(age, height, current_weight, goal_weight, weeks_to_go
 
     return limit
 
+@get('/search')
+def search_upc():
+    response.headers['Access-Control-Allow-Origin'] = '*'
+
+    for param in request.query.keys():
+        print "%s: %s" % (param, request.query.get(param))
+
+    upc = request.query.get('upc', '016000264601')
+    session_id = request.query.get('session_id')
+    daily_calorie_limit = float(request.query.get('daily_cal', '2000'))
+
+    label = get_food_label(upc, session_id)
+    product = label['productsArray'][0]
+    nutrients = calculate_nutrient_percents(product['nutrients'], daily_calorie_limit)
+    
+    data = {'item': product['product_name'],
+            'serving_size': product['serving_size'],
+            'serving_size_uom': product['serving_size_uom'],
+            'servings_per_container': product['servings_per_container'],
+            'nutrients': nutrients, 
+            'ingredients': product['ingredients'],
+            'daily_calorie_limit': daily_calorie_limit}
+
+    return data
+
 @post('/set_profile')
 def set_profile():
     response.headers['Access-Control-Allow-Origin'] = '*'
 
-    age = int(request.forms.get('age', request.query.get('age', '25')))
-    height = int(request.forms.get('height', request.query.get('height', '70')))
-    current_weight = int(request.forms.get('current_weight', request.query.get('current_weight', '180')))
-    goal_weight = int(request.forms.get('goal_weight', request.query.get('goal_weight', '170')))
-    weeks_to_goal = int(request.forms.get('weeks_to_goal', request.query.get('weeks_to_goal', '4')))
-    gender = request.forms.get('gender', request.query.get('gender', 'male')).lower()
-    activity_level = request.forms.get('activity_level', request.query.get('activity_level', 'sedentary')).lower()
+    age = int(request.forms.get('age', '25'))
+    height = int(request.forms.get('height', '70'))
+    current_weight = int(request.forms.get('current_weight', '180'))
+    goal_weight = int(request.forms.get('goal_weight', '170'))
+    weeks_to_goal = int(request.forms.get('weeks_to_goal', '4'))
+    gender = request.forms.get('gender', 'male').lower()
+    activity_level = request.forms.get('activity_level', 'sedentary').lower()
 
     daily_calorie_limit = calculate_daily_intake(age, height, current_weight, goal_weight, weeks_to_goal, gender, activity_level)
 
@@ -116,7 +119,7 @@ def set_profile():
 
     nutrients = []
     for nutrient in true_nutrients:
-        n = {"name": nutrient, "value": "true"}
+        n = {'name': nutrient, 'value': 'true'}
         nutrients.append(n)
     
     session_id = request.forms.get('session_id', None)

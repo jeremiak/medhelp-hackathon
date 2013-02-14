@@ -29,7 +29,7 @@ R.Router = R.Router || {};
 
     start: function() {
       if($.totalStorage('sid') === undefined) {
-        var url = 'http://pacific-eyrie-4115.herokuapp.com/set_profile?uid=rhino_user&devid=rhino_device';        
+        var url = 'http://pacific-eyrie-4115.herokuapp.com/create_food_api_session?uid=rhino_user&devid=rhino_device';        
         $.ajax({
            url: url,
                type: 'POST',

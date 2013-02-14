@@ -36,12 +36,12 @@ R.Router = R.Router || {};
                success: function(data) {
                    console.log('session id successfully returned: ' + data)
                    $.totalStorage('sid', data);
-                   this.navigate('product-search', {trigger: true});
                },
                error: function(data) {
                    console.log(data);
                }
             });
+        this.navigate('product-search', {trigger: true});
       } else {
         this.navigate('product-search', {trigger: true});
       }

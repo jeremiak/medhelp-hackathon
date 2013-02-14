@@ -1,4 +1,3 @@
-
 R.Router = R.Router || {};
 
 (function(R, _, $, Backbone) {
@@ -29,10 +28,20 @@ R.Router = R.Router || {};
     },
 
     start: function() {
-      if($.totalStorage('auth_token') === undefined) {
-        this.navigate('login', {trigger: true});
-      } else if ($.totalStorage('limit') === undefined) {
-        this.navigate('person-input', {trigger: true});
+      if($.totalStorage('sid') === undefined) {
+        var url = 'http://pacific-eyrie-4115.herokuapp.com/create_food_api_session?uid=rhino_user&devid=rhino_device';        
+        $.ajax({
+           url: url,
+               type: 'GET',
+               success: function(data) {
+                   console.log('session id successfully returned: ' + data)
+                   $.totalStorage('sid', data);
+               },
+               error: function(data) {
+                   console.log(data);
+               }
+            });
+        this.navigate('product-search', {trigger: true});
       } else {
         this.navigate('product-search', {trigger: true});
       }

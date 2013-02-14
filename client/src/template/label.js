@@ -2,6 +2,7 @@ R.Template = R.Template || {};
 
 R.Template.Label = {
   Start: ' \
+          <h2><%= item %></h2> \
           <div class="nutrition-label"> \
             <h1>Nutrition Facts</h1> \
             <h2>Serving Size <%= serving_size %> <%= serving_size_uom %></h2> \

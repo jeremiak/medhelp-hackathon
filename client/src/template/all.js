@@ -54,7 +54,7 @@ R.Template.Product = {
   <form id="productSearch" class="clearfix"> \
     <label>Product UPC</label> \
     <div class="right"> \
-      <input type="text" name="upc" /><span></span> \
+      <input style="width:150px;" type="text" name="upc" /><span></span> \
     </div> \
     <div class="centered"> \
       <a href="#" class="button submitForm">start</a> \

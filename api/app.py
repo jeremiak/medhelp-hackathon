@@ -197,6 +197,7 @@ def set_profile():
 
 @get('/create_food_api_session')
 def create_session():
+    response.headers['Access-Control-Allow-Origin'] = '*'
 
     uid = request.query.get('uid', 'rhino_user')
     devid = request.query.get('devid', 'rhino_device')

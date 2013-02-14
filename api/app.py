@@ -258,7 +258,7 @@ def create_session():
 
     r = requests.get((FOOD_API % 'createsession'), params=params)
 
-    session_id = r.json.get('session_id', None)
+    session_id = r.json().get('session_id', None)
     
     return session_id
 

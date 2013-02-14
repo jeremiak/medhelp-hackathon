@@ -93,7 +93,7 @@ def calculate_daily_intake(age, height, current_weight, goal_weight, weeks_to_go
     
     limit = bmr_and_activity - ((pounds_per_week * 3500) / 7)
 
-    return {'limit': '%d' % limit}
+    return limit
 
 @post('/set_profile')
 def set_profile():

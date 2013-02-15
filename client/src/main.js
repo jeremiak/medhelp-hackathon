@@ -28,14 +28,15 @@ R.Router = R.Router || {};
     },
 
     start: function() {
-      if($.totalStorage('sid') === undefined) {
+      var sid = window.localStorage.getItem('sid');
+      if(sid === null) {
         var url = 'http://pacific-eyrie-4115.herokuapp.com/create_food_api_session?uid=rhino_user&devid=rhino_device';        
         $.ajax({
            url: url,
                type: 'GET',
                success: function(data) {
                    console.log('session id successfully returned: ' + data)
-                   $.totalStorage('sid', data);
+                   window.localStorage.setItem('sid', data);
                },
                error: function(data) {
                    console.log(data);
@@ -43,7 +44,7 @@ R.Router = R.Router || {};
             });
         this.navigate('product-search', {trigger: true});
       } else {
-        this.navigate('product-search', {trigger: true});
+          this.navigate('product-search', {trigger: true});
       }
       // window.location.reload();
     },
